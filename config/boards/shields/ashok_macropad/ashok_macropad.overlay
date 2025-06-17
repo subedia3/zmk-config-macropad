@@ -4,21 +4,33 @@
 / {
     chosen {
         zmk,kscan = &kscan0;
+        zmk,physical-layout = &matrix_transform_3x3;
+    };
+
+    matrix_transform_3x3: keymap_transform_0 {
+        compatible = "zmk,matrix-transform";
+        columns = <3>;
+        rows = <3>;
+        map = <
+            RC(0,1) RC(0,2) RC(0,0)
+            RC(1,1) RC(1,2) RC(1,0)
+            RC(2,1) RC(2,2) RC(2,0)
+        >;
     };
 
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
 
-        row-gpios = 
-            <&gpio0 4  GPIO_PULL_DOWN>,  /* ROW1: P0.04 (AIN2) */
-            <&gpio0 12 GPIO_PULL_DOWN>,  /* ROW2: P0.12 */
-            <&gpio0 7  GPIO_PULL_DOWN>;  /* ROW3: P0.07 */
+        row-gpios =
+            <&gpio0 4  GPIO_PULL_DOWN>,
+            <&gpio0 12 GPIO_PULL_DOWN>,
+            <&gpio0 7  GPIO_PULL_DOWN>;
 
-        col-gpios = 
-            <&gpio0 8  GPIO_ACTIVE_LOW>,  /* COL1: P0.08 */
-            <&gpio0 6  GPIO_ACTIVE_LOW>,  /* COL2: P0.06 */
-            <&gpio0 26 GPIO_ACTIVE_LOW>;  /* COL3: P0.26 */
+        col-gpios =
+            <&gpio0 8  GPIO_ACTIVE_LOW>,
+            <&gpio0 6  GPIO_ACTIVE_LOW>,
+            <&gpio0 26 GPIO_ACTIVE_LOW>;
     };
 
     encoder0: encoder {
