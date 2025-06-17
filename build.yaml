@@ -20,4 +20,4 @@
 ---
 include:
   - board: nrf52840dk_nrf52840
-    shield: romac
+    shield: ashok_macropad
