@@ -11,14 +11,14 @@
         diode-direction = "col2row";
 
         row-gpios = 
-            <&gpio0 4  (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>,
-            <&gpio0 12 (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>,
-            <&gpio0 7  (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>;
+            <&gpio0 4  GPIO_PULL_DOWN>,  /* ROW1: P0.04 (AIN2) */
+            <&gpio0 12 GPIO_PULL_DOWN>,  /* ROW2: P0.12 */
+            <&gpio0 7  GPIO_PULL_DOWN>;  /* ROW3: P0.07 */
 
         col-gpios = 
-            <&gpio0 8  (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>,
-            <&gpio0 6  (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>,
-            <&gpio0 26 (GPIO_ACTIVE_LOW | GPIO_PULL_DOWN)>;
+            <&gpio0 8  GPIO_ACTIVE_LOW>,  /* COL1: P0.08 */
+            <&gpio0 6  GPIO_ACTIVE_LOW>,  /* COL2: P0.06 */
+            <&gpio0 26 GPIO_ACTIVE_LOW>;  /* COL3: P0.26 */
     };
 
     encoder0: encoder {
