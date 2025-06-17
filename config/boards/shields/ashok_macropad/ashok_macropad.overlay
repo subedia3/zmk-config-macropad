@@ -1,5 +1,6 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <zephyr/dt-bindings/gpio/gpio.h>
+#include <zephyr/dt-bindings/pinctrl/nordic-nrf-pinctrl.h>
 
 / {
     chosen {
@@ -36,6 +37,14 @@
 
 &i2c0 {
     status = "okay";
-    sda-pin = <24>;
-    scl-pin = <13>;
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-names = "default";
+};
+
+&pinctrl {
+    i2c0_default: i2c0_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 24) NRF_PSEL(TWIM_SCL, 0, 13)>;
+        };
+    };
 };
