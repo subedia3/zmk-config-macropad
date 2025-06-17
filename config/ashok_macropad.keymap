@@ -8,10 +8,10 @@
 
         default_layer {
             bindings = <
-                &kp(N7) &kp(N8) &kp(N9)
-                &kp(N4) &kp(N5) &kp(N6)
-                &kp(N1) &kp(N2) &kp(N3)
-                &mo(1)  &kp(N0) &kp(DOT)
+                &kp(KP_7) &kp(KP_8) &kp(KP_9)
+                &kp(KP_4) &kp(KP_5) &kp(KP_6)
+                &kp(KP_1) &kp(KP_2) &kp(KP_3)
+                &mo(1)    &kp(KP_0) &kp(DOT)
             >;
         };
 
