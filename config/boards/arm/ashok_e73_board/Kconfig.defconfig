@@ -3,4 +3,10 @@ if BOARD_ASHOK_E73_BOARD
 config BOARD
 	default "ashok_e73_board"
 
+config SOC
+	default "nrf52840"
+
+config SOC_NRF52840_QIAA
+	default y
+
 endif # BOARD_ASHOK_E73_BOARD
