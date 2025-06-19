@@ -19,5 +19,5 @@
 #
 ---
 include:
-  - board: ashok_e73_board
+  - board: nrf52840dk_nrf52840
     shield: ashok_macropad

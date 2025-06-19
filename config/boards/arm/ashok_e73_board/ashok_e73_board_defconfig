@@ -3,12 +3,6 @@
 # Board Configuration
 CONFIG_BOARD_ASHOK_E73_BOARD=y
 
-# Enable MPU
-CONFIG_ARM_MPU=y
-
-# Enable hardware stack protection
-CONFIG_HW_STACK_PROTECTION=y
-
 # Enable GPIO
 CONFIG_GPIO=y
 
@@ -46,6 +40,3 @@ CONFIG_SETTINGS_NVS=y
 
 # Enable ADC
 CONFIG_ADC=y
-
-# Reset on fatal error
-CONFIG_RESET_ON_FATAL_ERROR=y
