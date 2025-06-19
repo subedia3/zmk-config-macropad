@@ -26,14 +26,14 @@
         wakeup-source;
 
         col-gpios = 
-            <&gpio0 13 GPIO_ACTIVE_HIGH>,   /* COL1: P0.13 - Button 1 on DK */
-            <&gpio0 14 GPIO_ACTIVE_HIGH>,   /* COL2: P0.14 - Button 2 on DK */
-            <&gpio0 15 GPIO_ACTIVE_HIGH>;   /* COL3: P0.15 - Button 3 on DK */
+            <&gpio0 8  GPIO_ACTIVE_HIGH>,   /* COL1: P0.08 - Original from schematic */
+            <&gpio0 6  GPIO_ACTIVE_HIGH>,   /* COL2: P0.06 - Original from schematic */
+            <&gpio0 26 GPIO_ACTIVE_HIGH>;   /* COL3: P0.26 - Original from schematic */
 
         row-gpios = 
-            <&gpio0 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW1: P0.16 - Button 4 on DK */
-            <&gpio0 17 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW2: P0.17 - available pin */
-            <&gpio0 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;  /* ROW3: P0.18 - available pin */
+            <&gpio0 4  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW1: P0.04 - Original from schematic */
+            <&gpio0 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW2: P0.12 - Original from schematic */
+            <&gpio0 7  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;  /* ROW3: P0.07 - Original from schematic */
 
         debounce-press-ms = <1>;
         debounce-release-ms = <5>;
@@ -47,36 +47,14 @@
 
     encoder0: encoder {
         compatible = "alps,ec11";
-        a-gpios = <&gpio0 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // P0.11 - available
-        b-gpios = <&gpio0 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // P0.12 - available  
+        a-gpios = <&gpio1 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Original from schematic */
+        b-gpios = <&gpio1 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Original from schematic */
         steps = <24>;
         status = "okay";
     };
 };
 
-&pinctrl {
-    spi3_default: spi3_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 20)>; // P0.20 - available on Nordic DK
-        };
-    };
-
-    spi3_sleep: spi3_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 20)>; // P0.20 - available on Nordic DK
-            low-power-enable;
-        };
-    };
-};
-
 &spi3 {
-    compatible = "nordic,nrf-spim";
-    status = "okay";
-
-    pinctrl-0 = <&spi3_default>;
-    pinctrl-1 = <&spi3_sleep>;
-    pinctrl-names = "default", "sleep";
-
     led_strip: ws2812@0 {
         compatible = "worldsemi,ws2812-spi";
 
