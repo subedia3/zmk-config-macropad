@@ -26,14 +26,14 @@
         wakeup-source;
 
         col-gpios = 
-            <&gpio0 9  GPIO_ACTIVE_HIGH>,   /* COL1: P0.09 (changed from P0.08) */
-            <&gpio0 10 GPIO_ACTIVE_HIGH>,   /* COL2: P0.10 (changed from P0.06) */
-            <&gpio0 26 GPIO_ACTIVE_HIGH>;   /* COL3: P0.26 */
+            <&gpio0 13 GPIO_ACTIVE_HIGH>,   /* COL1: P0.13 - Button 1 on DK */
+            <&gpio0 14 GPIO_ACTIVE_HIGH>,   /* COL2: P0.14 - Button 2 on DK */
+            <&gpio0 15 GPIO_ACTIVE_HIGH>;   /* COL3: P0.15 - Button 3 on DK */
 
         row-gpios = 
-            <&gpio0 4  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW1: P0.04 (AIN2) */
-            <&gpio0 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW2: P0.12 */
-            <&gpio0 7  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;  /* ROW3: P0.07 */
+            <&gpio0 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW1: P0.16 - Button 4 on DK */
+            <&gpio0 17 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW2: P0.17 - available pin */
+            <&gpio0 18 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;  /* ROW3: P0.18 - available pin */
 
         debounce-press-ms = <1>;
         debounce-release-ms = <5>;
@@ -47,8 +47,8 @@
 
     encoder0: encoder {
         compatible = "alps,ec11";
-        a-gpios = <&gpio1 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        b-gpios = <&gpio1 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        a-gpios = <&gpio0 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // P0.11 - available
+        b-gpios = <&gpio0 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // P0.12 - available  
         steps = <24>;
         status = "okay";
     };
@@ -57,13 +57,13 @@
 &pinctrl {
     spi3_default: spi3_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 1, 9)>; // Pin 41 = P1.09
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 20)>; // P0.20 - available on Nordic DK
         };
     };
 
     spi3_sleep: spi3_sleep {
         group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 1, 9)>; // Pin 41 = P1.09
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 20)>; // P0.20 - available on Nordic DK
             low-power-enable;
         };
     };
@@ -91,3 +91,7 @@
         color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
     };
 };
+
+
+
+
