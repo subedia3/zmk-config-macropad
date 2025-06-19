@@ -22,26 +22,28 @@
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
 
+        col-gpios = 
+            <&gpio0 8  GPIO_ACTIVE_HIGH>,   /* COL1: P0.08 */
+            <&gpio0 6  GPIO_ACTIVE_HIGH>,   /* COL2: P0.06 */
+            <&gpio0 26 GPIO_ACTIVE_HIGH>;   /* COL3: P0.26 */
+
         row-gpios = 
             <&gpio0 4  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW1: P0.04 (AIN2) */
             <&gpio0 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW2: P0.12 */
             <&gpio0 7  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;  /* ROW3: P0.07 */
+    };
 
-        col-gpios = 
-            <&gpio0 8  (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>,  /* COL1: P0.08 */
-            <&gpio0 6  (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>,  /* COL2: P0.06 */
-            <&gpio0 26 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;  /* COL3: P0.26 */
+    sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&encoder0>;
+        triggers-per-rotation = <24>;
     };
 
     encoder0: encoder {
-        compatible = "zmk,encoder";
-        a-gpios = <&gpio1 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        b-gpios = <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        resolution = <4>;
-    };
-
-    encoder_button: encoder_button {
-        compatible = "zmk,behavior-button";
-        gpios = <&gpio1 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        compatible = "alps,ec11";
+        a-gpios = <&gpio1 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        b-gpios = <&gpio1 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        steps = <24>;
+        status = "okay";
     };
 };
