@@ -20,17 +20,21 @@
 
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
-        diode-direction = "col2row";
-
-        col-gpios = 
-            <&gpio0 8  GPIO_ACTIVE_HIGH>,   /* COL1: P0.08 */
-            <&gpio0 6  GPIO_ACTIVE_HIGH>,   /* COL2: P0.06 */
-            <&gpio0 26 GPIO_ACTIVE_HIGH>;   /* COL3: P0.26 */
+        diode-direction = "row2col";
+        wakeup-source;
 
         row-gpios = 
-            <&gpio0 4  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW1: P0.04 (AIN2) */
-            <&gpio0 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW2: P0.12 */
-            <&gpio0 7  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;  /* ROW3: P0.07 */
+            <&gpio0 4  GPIO_ACTIVE_HIGH>,  /* ROW1: P0.04 (AIN2) */
+            <&gpio0 12 GPIO_ACTIVE_HIGH>,  /* ROW2: P0.12 */
+            <&gpio0 7  GPIO_ACTIVE_HIGH>;  /* ROW3: P0.07 */
+
+        col-gpios = 
+            <&gpio0 8  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,   /* COL1: P0.08 */
+            <&gpio0 6  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,   /* COL2: P0.06 */
+            <&gpio0 26 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;   /* COL3: P0.26 */
+
+        debounce-press-ms = <1>;
+        debounce-release-ms = <5>;
     };
 
     sensors {
