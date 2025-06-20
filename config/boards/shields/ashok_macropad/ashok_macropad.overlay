@@ -11,12 +11,13 @@
 
     default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
-        columns = <3>;
+        columns = <4>;
         rows = <3>;
         map = <
             RC(0,0) RC(0,1) RC(0,2)
             RC(1,0) RC(1,1) RC(1,2)
             RC(2,0) RC(2,1) RC(2,2)
+            RC(0,3)
         >;
     };
 
@@ -28,7 +29,8 @@
         col-gpios = 
             <&gpio0 8  GPIO_ACTIVE_HIGH>,   /* COL1: P0.08 - Your original pin */
             <&gpio0 6  GPIO_ACTIVE_HIGH>,   /* COL2: P0.06 - Your original pin */
-            <&gpio0 26 GPIO_ACTIVE_HIGH>;   /* COL3: P0.26 - Your original pin */
+            <&gpio0 26 GPIO_ACTIVE_HIGH>,   /* COL3: P0.26 - Your original pin */
+            <&gpio1 2  GPIO_ACTIVE_HIGH>;   /* COL4: P1.02 - Encoder button */
 
         row-gpios = 
             <&gpio0 4  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW1: P0.04 - Original from schematic */
