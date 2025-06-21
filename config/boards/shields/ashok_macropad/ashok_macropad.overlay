@@ -44,14 +44,14 @@
     sensors {
         compatible = "zmk,keymap-sensors";
         sensors = <&encoder0>;
-        triggers-per-rotation = <24>;
+        triggers-per-rotation = <20>;
     };
 
     encoder0: encoder {
         compatible = "alps,ec11";
-        a-gpios = <&gpio1 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Original from schematic */
-        b-gpios = <&gpio1 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; /* Original from schematic */
-        steps = <24>;
+        a-gpios = <&gpio1 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        b-gpios = <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        steps = <20>;
         status = "okay";
     };
 };
