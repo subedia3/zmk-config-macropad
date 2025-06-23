@@ -1,6 +1,0 @@
-if BOARD_ASHOK_E73_BOARD
-
-config BOARD
-	default "ashok_e73_board"
-
-endif # BOARD_ASHOK_E73_BOARD
