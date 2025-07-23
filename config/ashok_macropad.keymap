@@ -22,7 +22,7 @@
                 &kp KP_N0
             >;
             
-            sensor-bindings = <&kp KP_N1 &kp KP_N2>;
+            sensor-bindings = <&inc_dec_kp KP_N1 KP_N2>;
         };
     };
 };

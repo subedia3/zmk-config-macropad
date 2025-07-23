@@ -43,7 +43,6 @@
 
     encoder0: encoder_0 {
         compatible = "alps,ec11";
-        label = "ENCODER";
         a-gpios = <&gpio1 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         b-gpios = <&gpio1 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         steps = <80>;
