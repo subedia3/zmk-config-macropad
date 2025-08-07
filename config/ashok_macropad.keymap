@@ -12,12 +12,21 @@
     //     triggers-per-rotation = <1>;
     // };
 
+    behaviors {
+        hello_macro: hello_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp H &kp E &kp L &kp L &kp O &kp SPACE &kp W &kp O &kp R &kp L &kp D>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             bindings = <
-                &rgb_ug RGB_TOG &kp KP_N8 &bootloader
+                &rgb_ug RGB_TOG &hello_macro &bootloader
                 &kp KP_N4 &kp KP_N5 &kp KP_N6
                 &kp KP_N1 &kp KP_N2 &bt BT_CLR
                 &kp KP_N0
