@@ -7,7 +7,7 @@
         zmk,kscan = &kscan0;
         zmk,matrix-transform = &default_transform;
         zmk,underglow = &led_strip;
-        // zmk,display = &oled;
+        zmk,display = &oled;
     };
 
     default_transform: keymap_transform_0 {
@@ -64,6 +64,21 @@
             low-power-enable;
         };
     };
+
+    i2c0_default: i2c0_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 24)>,
+                   <NRF_PSEL(TWIM_SCL, 0, 13)>;
+        };
+    };
+
+    i2c0_sleep: i2c0_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 24)>,
+                   <NRF_PSEL(TWIM_SCL, 0, 13)>;
+            low-power-enable;
+        };
+    };
 };
 
 &spi3 {
@@ -89,13 +104,11 @@
     };
 };
 
-// Commented out OLED configuration for now - will re-enable after basic build works
-/*
-&i2c1 {
+&i2c0 {
     status = "okay";
     compatible = "nordic,nrf-twim";
-    pinctrl-0 = <&i2c1_default>;
-    pinctrl-1 = <&i2c1_sleep>;
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-1 = <&i2c0_sleep>;
     pinctrl-names = "default", "sleep";
 
     oled: ssd1306@3c {
@@ -113,4 +126,3 @@
         prechargep = <0x22>;
     };
 };
-*/
