@@ -1,18 +1,5 @@
 #include <dt-bindings/zmk/matrix_transform.h>
-#include <zephyr/dt-b    i2c1_default: i2c1_default {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 29)>,
-                   <NRF_PSEL(TWIM_SCL, 0, 31)>;
-        };
-    };
-
-    i2c1_sleep: i2c1_sleep {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 29)>,
-                   <NRF_PSEL(TWIM_SCL, 0, 31)>;
-            low-power-enable;
-        };
-    };pio.h>
+#include <zephyr/dt-bindings/gpio/gpio.h>
 #include <dt-bindings/led/led.h>
 
 / {
