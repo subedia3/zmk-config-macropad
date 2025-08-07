@@ -1,5 +1,18 @@
 #include <dt-bindings/zmk/matrix_transform.h>
-#include <zephyr/dt-bindings/gpio/gpio.h>
+#include <zephyr/dt-b    i2c1_default: i2c1_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 29)>,
+                   <NRF_PSEL(TWIM_SCL, 0, 31)>;
+        };
+    };
+
+    i2c1_sleep: i2c1_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 29)>,
+                   <NRF_PSEL(TWIM_SCL, 0, 31)>;
+            low-power-enable;
+        };
+    };pio.h>
 #include <dt-bindings/led/led.h>
 
 / {
@@ -7,7 +20,7 @@
         zmk,kscan = &kscan0;
         zmk,matrix-transform = &default_transform;
         zmk,underglow = &led_strip;
-        zmk,display = &oled;
+        // zmk,display = &oled;
     };
 
     default_transform: keymap_transform_0 {
@@ -64,21 +77,6 @@
             low-power-enable;
         };
     };
-
-    i2c0_default: i2c0_default {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
-                   <NRF_PSEL(TWIM_SCL, 0, 20)>;
-        };
-    };
-
-    i2c0_sleep: i2c0_sleep {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
-                   <NRF_PSEL(TWIM_SCL, 0, 20)>;
-            low-power-enable;
-        };
-    };
 };
 
 &spi3 {
@@ -104,11 +102,13 @@
     };
 };
 
-&i2c0 {
+// Commented out OLED configuration for now - will re-enable after basic build works
+/*
+&i2c1 {
     status = "okay";
-    compatible = "nordic,nrf-twi";
-    pinctrl-0 = <&i2c0_default>;
-    pinctrl-1 = <&i2c0_sleep>;
+    compatible = "nordic,nrf-twim";
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-1 = <&i2c1_sleep>;
     pinctrl-names = "default", "sleep";
 
     oled: ssd1306@3c {
@@ -126,3 +126,4 @@
         prechargep = <0x22>;
     };
 };
+*/
