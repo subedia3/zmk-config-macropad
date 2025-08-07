@@ -8,4 +8,12 @@ config ZMK_KEYBOARD_NAME
 config EC11
     default y
 
+# Enable I2C for OLED
+config I2C
+    default y
+
+# Enable SSD1306 OLED driver
+config SSD1306
+    default y
+
 endif
