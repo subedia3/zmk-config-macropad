@@ -1,5 +1,6 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <zephyr/dt-bindings/gpio/gpio.h>
+#include <zephyr/dt-bindings/i2c/i2c.h>
 #include <dt-bindings/led/led.h>
 
 / {
@@ -7,7 +8,7 @@
         zmk,kscan = &kscan0;
         zmk,matrix-transform = &default_transform;
         zmk,underglow = &led_strip;
-        zmk,display = &oled;
+        zephyr,display = &oled;
     };
 
     default_transform: keymap_transform_0 {
@@ -65,14 +66,14 @@
         };
     };
 
-    i2c0_default: i2c0_default {
+    i2c1_default: i2c1_default {
         group1 {
             psels = <NRF_PSEL(TWIM_SDA, 0, 24)>,
                    <NRF_PSEL(TWIM_SCL, 0, 13)>;
         };
     };
 
-    i2c0_sleep: i2c0_sleep {
+    i2c1_sleep: i2c1_sleep {
         group1 {
             psels = <NRF_PSEL(TWIM_SDA, 0, 24)>,
                    <NRF_PSEL(TWIM_SCL, 0, 13)>;
@@ -104,16 +105,18 @@
     };
 };
 
-&i2c0 {
+&i2c1 {
     status = "okay";
     compatible = "nordic,nrf-twim";
-    pinctrl-0 = <&i2c0_default>;
-    pinctrl-1 = <&i2c0_sleep>;
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-1 = <&i2c1_sleep>;
     pinctrl-names = "default", "sleep";
+    clock-frequency = <I2C_BITRATE_FAST>;
 
     oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
+        label = "DISPLAY";
         width = <128>;
         height = <32>;
         segment-offset = <0>;
@@ -124,5 +127,6 @@
         com-invdir;
         com-sequential;
         prechargep = <0x22>;
+        status = "okay";
     };
 };

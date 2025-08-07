@@ -1,3 +1,6 @@
 # No whitespace after the comma or in your keyboard name!
-config SHIELD_MACROPAD
-    def_bool $(shields_list_contains,ashok_macropad)   
+config SHIELD_ASHOK_MACROPAD
+    def_bool $(shields_list_contains,ashok_macropad)
+    select I2C
+    select SSD1306
+    select LVGL_USE_CONT   
