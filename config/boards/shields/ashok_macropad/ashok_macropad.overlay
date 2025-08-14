@@ -21,14 +21,13 @@
         >;
     };
 
-    
-        wakeup-source;
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        diode-direction = "col2row";
 
         col-gpios = 
             <&gpio0 8  GPIO_ACTIVE_HIGH>,   /* COL1: P0.08 - Your original pin */
-          kscan0: kscan {
-        compatible = "zmk,kscan-gpio-matrix";
-        diode-direction = "col2row";  <&gpio0 6  GPIO_ACTIVE_HIGH>,   /* COL2: P0.06 - Your original pin */
+            <&gpio0 6  GPIO_ACTIVE_HIGH>,   /* COL2: P0.06 - Your original pin */
             <&gpio0 26 GPIO_ACTIVE_HIGH>,   /* COL3: P0.26 - Your original pin */
             <&gpio1 2  GPIO_ACTIVE_HIGH>;   /* COL4: P1.02 - Encoder button */
 
