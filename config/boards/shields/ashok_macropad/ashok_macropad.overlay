@@ -26,17 +26,24 @@
         diode-direction = "col2row";
 
         col-gpios = 
-            <&gpio0 8  GPIO_ACTIVE_HIGH>,   /* COL1: P0.08 - Your original pin */
-            <&gpio0 6  GPIO_ACTIVE_HIGH>,   /* COL2: P0.06 - Your original pin */
-            <&gpio0 26 GPIO_ACTIVE_HIGH>,   /* COL3: P0.26 - Your original pin */
+            <&gpio0 8  GPIO_ACTIVE_HIGH>,   /* COL1: P0.08 */
+            <&gpio0 6  GPIO_ACTIVE_HIGH>,   /* COL2: P0.06 */
+            <&gpio0 26 GPIO_ACTIVE_HIGH>,   /* COL3: P0.26 */
             <&gpio1 2  GPIO_ACTIVE_HIGH>;   /* COL4: P1.02 - Encoder button */
 
         row-gpios = 
-            <&gpio0 4  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW1: P0.04 - Original from schematic */
-            <&gpio0 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW2: P0.12 - Original from schematic */
-            <&gpio0 7  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;  /* ROW3: P0.07 - Original from schematic */
+            <&gpio0 4  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW1: P0.04 */
+            <&gpio0 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW2: P0.12 */
+            <&gpio0 7  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;  /* ROW3: P0.07 */
 
         debounce-press-ms = <1>;
+        debounce-release-ms = <5>;
+    };
+
+    encoder_button: encoder_button {
+        compatible = "zmk,kscan-gpio-direct";
+        input-gpios = <&gpio1 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        debounce-press-ms = <5>;
         debounce-release-ms = <5>;
     };
 
