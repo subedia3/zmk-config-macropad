@@ -1,14 +1,11 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <zephyr/dt-bindings/gpio/gpio.h>
-#include <zephyr/dt-bindings/i2c/i2c.h>
 #include <dt-bindings/led/led.h>
 
-/ {
     chosen {
         zmk,kscan = &kscan0;
         zmk,matrix-transform = &default_transform;
         zmk,underglow = &led_strip;
-        zephyr,display = &oled;
     };
 
     default_transform: keymap_transform_0 {
@@ -23,14 +20,14 @@
         >;
     };
 
-    kscan0: kscan {
-        compatible = "zmk,kscan-gpio-matrix";
-        diode-direction = "col2row";
+    
         wakeup-source;
 
         col-gpios = 
             <&gpio0 8  GPIO_ACTIVE_HIGH>,   /* COL1: P0.08 - Your original pin */
-            <&gpio0 6  GPIO_ACTIVE_HIGH>,   /* COL2: P0.06 - Your original pin */
+          kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        diode-direction = "col2row";  <&gpio0 6  GPIO_ACTIVE_HIGH>,   /* COL2: P0.06 - Your original pin */
             <&gpio0 26 GPIO_ACTIVE_HIGH>,   /* COL3: P0.26 - Your original pin */
             <&gpio1 2  GPIO_ACTIVE_HIGH>;   /* COL4: P1.02 - Encoder button */
 
@@ -43,13 +40,14 @@
         debounce-release-ms = <5>;
     };
 
-    // encoder0: encoder_0 {
-    //     compatible = "alps,ec11";
-    //     a-gpios = <&gpio1 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-    //     b-gpios = <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-    //     steps = <80>;
-    //     status = "okay";
-    // };
+    encoder0: encoder_0 {
+        compatible = "alps,ec11";
+        a-gpios = <&gpio1 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        b-gpios = <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        /* Typical EC11 encoders use 4 steps per detent; adjust if your encoder differs */
+        steps = <4>;
+        status = "okay";
+    };
 };
 
 &pinctrl {
@@ -62,21 +60,6 @@
     spi3_sleep: spi3_sleep {
         group1 {
             psels = <NRF_PSEL(SPIM_MOSI, 1, 9)>; /* P1.09 - Your LED data pin */
-            low-power-enable;
-        };
-    };
-
-    i2c1_default: i2c1_default {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 24)>,
-                   <NRF_PSEL(TWIM_SCL, 0, 13)>;
-        };
-    };
-
-    i2c1_sleep: i2c1_sleep {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 24)>,
-                   <NRF_PSEL(TWIM_SCL, 0, 13)>;
             low-power-enable;
         };
     };
@@ -102,30 +85,5 @@
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
         color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
-    };
-};
-
-&i2c1 {
-    status = "okay";
-    compatible = "nordic,nrf-twim";
-    pinctrl-0 = <&i2c1_default>;
-    pinctrl-1 = <&i2c1_sleep>;
-    pinctrl-names = "default", "sleep";
-    clock-frequency = <I2C_BITRATE_STANDARD>;
-
-    oled: ssd1306@3d {
-        compatible = "solomon,ssd1306fb";
-        reg = <0x3d>;
-        label = "DISPLAY";
-        width = <128>;
-        height = <32>;
-        segment-offset = <0>;
-        page-offset = <0>;
-        display-offset = <0>;
-        multiplex-ratio = <31>;
-        segment-remap;
-        com-invdir;
-        prechargep = <0x22>;
-        status = "okay";
     };
 };
