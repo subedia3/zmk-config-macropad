@@ -1,0 +1,21 @@
+/*
+ * Custom overlay for nice_oled shield to work with Ashok's macropad
+ * I2C pins: P0.24 (SDA), P0.13 (SCL)
+ */
+
+&pinctrl {
+    i2c0_default: i2c0_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 24)>,   /* P0.24 - SDA */
+                    <NRF_PSEL(TWIM_SCL, 0, 13)>;   /* P0.13 - SCL */
+        };
+    };
+
+    i2c0_sleep: i2c0_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 24)>,   /* P0.24 - SDA */
+                    <NRF_PSEL(TWIM_SCL, 0, 13)>;   /* P0.13 - SCL */
+            low-power-enable;
+        };
+    };
+};

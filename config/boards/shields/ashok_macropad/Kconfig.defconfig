@@ -8,14 +8,4 @@ config ZMK_KEYBOARD_NAME
 config EC11
     default y
 
-# Enable display support
-config ZMK_DISPLAY
-    default y
-
-config I2C
-    default y
-
-config SSD1306
-    default y
-
 endif
