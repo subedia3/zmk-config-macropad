@@ -33,6 +33,7 @@
         direct {
             kscan = <&kscan_encoder_button>;
             column-offset = <3>;
+            row-offset = <0>;
         };
     };
 
