@@ -63,7 +63,7 @@
         compatible = "alps,ec11";
         a-gpios = <&gpio1 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         b-gpios = <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        steps = <4>;
+        steps = <12>;
         status = "okay";
     };
 
