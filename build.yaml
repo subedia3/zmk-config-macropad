@@ -19,5 +19,5 @@
 #
 include:
   - board: nice_nano_v2
-    shield: ashok_macropad ashok_oled
+    shield: ashok_macropad nice_oled
 
