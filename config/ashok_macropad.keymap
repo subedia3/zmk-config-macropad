@@ -20,9 +20,9 @@
 
         default_layer {
             bindings = <
-                &rgb_ug RGB_TOG &hello_macro &bootloader &kp KP_N0
+                &rgb_ug RGB_TOG &hello_macro &bootloader
                 &kp KP_N4 &kp KP_N5 &kp KP_N6
-                &kp KP_N1 &kp KP_N2 &bt BT_CLR
+                &kp KP_N1 &kp KP_N2 &bt BT_CLR &kp KP_N0
             >;
             
             sensor-bindings = <&inc_dec_kp KP_N1 KP_N2>;
