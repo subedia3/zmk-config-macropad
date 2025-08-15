@@ -6,6 +6,7 @@
 
 #include <zephyr/dt-bindings/gpio/gpio.h>
 
+// Override the pinctrl for I2C to use custom pins
 &pinctrl {
     i2c0_default: i2c0_default {
         group1 {
@@ -21,4 +22,11 @@
             low-power-enable;
         };
     };
+};
+
+// Ensure I2C is properly configured with our custom pins
+&i2c0 {
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-1 = <&i2c0_sleep>;
+    pinctrl-names = "default", "sleep";
 };
