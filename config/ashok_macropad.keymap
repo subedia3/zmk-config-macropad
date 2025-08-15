@@ -6,12 +6,6 @@
 #include <dt-bindings/zmk/rgb.h>
 
 / {
-    sensors {
-        compatible = "zmk,keymap-sensors";
-        sensors = <&encoder0>;
-        triggers-per-rotation = <1>;
-    };
-
     behaviors {
         hello_macro: hello_macro {
             compatible = "zmk,behavior-macro";

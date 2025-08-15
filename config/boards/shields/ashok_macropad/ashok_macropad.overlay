@@ -4,7 +4,7 @@
 
 / {
     chosen {
-        zmk,kscan = &kscan0;
+        zmk,kscan = &kscan_composite;
         zmk,matrix-transform = &default_transform;
         zmk,underglow = &led_strip;
     };
@@ -21,15 +21,29 @@
         >;
     };
 
-    kscan0: kscan {
+    kscan_composite: kscan_composite {
+        compatible = "zmk,kscan-composite";
+        rows = <3>;
+        columns = <4>;
+
+        matrix {
+            kscan = <&kscan_matrix>;
+        };
+
+        direct {
+            kscan = <&kscan_encoder_button>;
+            column-offset = <3>;
+        };
+    };
+
+    kscan_matrix: kscan_matrix {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
 
         col-gpios = 
             <&gpio0 8  GPIO_ACTIVE_HIGH>,   /* COL1: P0.08 */
             <&gpio0 6  GPIO_ACTIVE_HIGH>,   /* COL2: P0.06 */
-            <&gpio0 26 GPIO_ACTIVE_HIGH>,   /* COL3: P0.26 */
-            <&gpio1 2  GPIO_ACTIVE_HIGH>;   /* COL4: P1.02 - Encoder button */
+            <&gpio0 26 GPIO_ACTIVE_HIGH>;   /* COL3: P0.26 */
 
         row-gpios = 
             <&gpio0 4  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,  /* ROW1: P0.04 */
@@ -40,20 +54,22 @@
         debounce-release-ms = <5>;
     };
 
-    encoder_button: encoder_button {
+    kscan_encoder_button: kscan_encoder_button {
         compatible = "zmk,kscan-gpio-direct";
         input-gpios = <&gpio1 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        debounce-press-ms = <5>;
-        debounce-release-ms = <5>;
     };
 
     encoder0: encoder_0 {
         compatible = "alps,ec11";
         a-gpios = <&gpio1 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         b-gpios = <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        /* Typical EC11 encoders use 4 steps per detent; adjust if your encoder differs */
         steps = <4>;
         status = "okay";
+    };
+
+    sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&encoder0>;
     };
 };
 
